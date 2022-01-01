@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class origami {
+public class Origami {
 	static boolean[][] paper = new boolean[1][1];
 	static boolean foldHorizontal = false;
 	public static void main(String[] args) {
