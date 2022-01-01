@@ -5,18 +5,41 @@ import java.awt.Toolkit;
 public class Sonar {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		int currentDepth = Integer.parseInt(scanner.nextLine());
 		int count = 0;
+		
+		if (args.length == 0) {
+			// CHALLENGE ONE
+			int currentDepth = Integer.parseInt(scanner.nextLine());
+			while (scanner.hasNextLine()) {
+				int previousDepth = currentDepth;
+				currentDepth = Integer.parseInt(scanner.nextLine());
 
-		while (scanner.hasNextLine()) {
-			int previousDepth = currentDepth;
-			currentDepth = Integer.parseInt(scanner.nextLine());
+				if (currentDepth > previousDepth) {
+					count++;
+				}
+			}
+			scanner.close();
+		} 
+		else {
+			// CHALLENGE TWO
+			int[] currentWindow = new int[3];
+			int previousSum = 0;
 
-			if (currentDepth > previousDepth) {
-				count++;
+			currentWindow[2] = Integer.parseInt(scanner.nextLine());
+			currentWindow[1] = Integer.parseInt(scanner.nextLine());
+			currentWindow[0] = Integer.parseInt(scanner.nextLine());
+			
+			while (scanner.hasNextLine()) {				
+				previousSum = currentWindow[2] + currentWindow[1] + currentWindow[0];
+				currentWindow[2] = currentWindow[1];
+				currentWindow[1] = currentWindow[0];
+				currentWindow[0] = Integer.parseInt(scanner.nextLine());
+
+				if (currentWindow[2] + currentWindow[1] + currentWindow[0] > previousSum) {
+					count++;
+				}
 			}
 		}
-		scanner.close();
 
 		System.out.println("Total number of depth increases: " + count);
 
